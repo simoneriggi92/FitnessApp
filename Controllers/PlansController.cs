@@ -20,7 +20,7 @@ namespace GymApp.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Content("Sono in index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -32,7 +32,7 @@ namespace GymApp.Controllers
 
         public IActionResult PlanDetail(string id)
         {
-            return View();
+            return View($"Ho ricevuto l'id {id}");
         }
 
 
