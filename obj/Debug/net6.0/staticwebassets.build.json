@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "T1TqA0bknDCGud4aIVIZM0jQnQaj9Rq/0KiHaCrdexk=",
+  "Source": "GymApp",
+  "BasePath": "_content/GymApp",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "GymApp\\wwwroot",
+      "Source": "GymApp",
+      "ContentRoot": "C:\\Users\\s.riggi\\source\\repos\\GymApp\\GymApp\\wwwroot\\",
+      "BasePath": "_content/GymApp",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\s.riggi\\source\\repos\\GymApp\\GymApp\\wwwroot\\profilo.jpeg",
+      "SourceId": "GymApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\s.riggi\\source\\repos\\GymApp\\GymApp\\wwwroot\\",
+      "BasePath": "_content/GymApp",
+      "RelativePath": "profilo.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\profilo.jpeg"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\s.riggi\\source\\repos\\GymApp\\GymApp\\wwwroot\\profilo.jpeg",
+      "PackagePath": "staticwebassets\\profilo.jpeg"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.GymApp.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.GymApp.props",
+      "PackagePath": "build\\GymApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.GymApp.props",
+      "PackagePath": "buildMultiTargeting\\GymApp.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.GymApp.props",
+      "PackagePath": "buildTransitive\\GymApp.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
