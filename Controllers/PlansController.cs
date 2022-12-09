@@ -8,33 +8,19 @@ using Microsoft.Extensions.Logging;
 
 namespace GymApp.Controllers
 {
-    [Route("[controller]")]
-    public class PlanController : Controller
+    public class PlansController : Controller
+{
+    // 
+    // GET: /HelloWorld/
+    public IActionResult Index()
     {
-        private readonly ILogger<PlanController> _logger;
-
-        public PlanController(ILogger<PlanController> logger)
-        {
-            _logger = logger;
-        }
-
-        public IActionResult Index()
-        {
-            return Content("Sono in index");
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View("Error!");
-        }
-
-
-        public IActionResult PlanDetail(string id)
-        {
-            return View($"Ho ricevuto l'id {id}");
-        }
-
-
+        return Content("This is my default action...");
     }
+    // 
+    // GET: /HelloWorld/Welcome/ 
+    public IActionResult Welcome(string id)
+    {
+        return Content($"This is the Welcome action method...{id}");
+    }
+}
 }
