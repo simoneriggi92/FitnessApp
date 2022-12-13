@@ -19,7 +19,7 @@ namespace GymApp.Controllers
 
         public IActionResult Index()
         {
-            return Content("Sono la Home dell'app");
+            return View();
         }
 
        

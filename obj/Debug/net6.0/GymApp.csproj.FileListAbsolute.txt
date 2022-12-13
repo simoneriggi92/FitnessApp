@@ -31,3 +31,5 @@ C:\Users\s.riggi\source\repos\GymApp\GymApp\obj\Debug\net6.0\GymApp.pdb
 C:\Users\s.riggi\source\repos\GymApp\GymApp\obj\Debug\net6.0\GymApp.genruntimeconfig.cache
 C:\Users\s.riggi\source\repos\GymApp\GymApp\obj\Debug\net6.0\ref\GymApp.dll
 C:\Users\s.riggi\source\repos\GymApp\GymApp\bin\Debug\net6.0\GymApp.staticwebassets.runtime.json
+C:\Users\s.riggi\source\repos\GymApp\GymApp\obj\Debug\net6.0\GymApp.RazorAssemblyInfo.cache
+C:\Users\s.riggi\source\repos\GymApp\GymApp\obj\Debug\net6.0\GymApp.RazorAssemblyInfo.cs
