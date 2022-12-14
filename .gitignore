@@ -100,7 +100,6 @@ StyleCopReport.xml
 .builds
 *.pidb
 *.svclog
-
 *.scc
 *.cache
 *.dll
