@@ -1,11 +1,11 @@
 
-<section class="course-info">
+<section class="plan-info">
     <div class="row">
     <div class="col-md-9">
         <h1>Title</h1>
     </div>
     <div class="col-md-3 d-flex align-items-end">
-        <a href="#" class="btn btn-warning">Iscriviti</a>
+        <a href="#" class="btn btn-warning">Start Plan</a>
         </div>
     </div>
     <div class="row">
@@ -32,6 +32,9 @@
                 }
             } *@
                     </div>
+                    <div class="duration">
+                       <i class="far fa-clock"></i><time>1m 30s</time>
+                        <br></div>
                     <div class="price">
                         @* @Model.CurrentPrice
                         @if(!Model.CurrentPrice.Equals(Model.FullPrice))
@@ -45,31 +48,34 @@
     </div>
 </section>
 
-<section class="course-lessons">
+<section class="exercises">
     <h2>
-        Lezioni@* Lezioni (@Model.Lessons.Count) *@
+        Exercises@* Lezioni (@Model.Lessons.Count) *@
     </h2>
     @* @foreach (var lesson in Model.Lessons)
     { *@
+    @for(int i = 0; i< 8; i++)
+    {
         <hr>
         
         <div class="row">
             <div class="col-md-9 d-flex align-items-center ">
-                <a href="#">Title</a>
+                <a href="#">Exercise @i</a>
             </div>
-            <div>
-                <i class="far fa-clock"><time>Duration</time></i>
+            <div class="col-md-3 d-flex align-items-center exercise-duration">
+                <i class="far fa-clock"></i><time>1m 30s</time>
             </div>
-            </div>
+        </div>
     @* } *@
+    }
         </hr>
 
-        <div class="row course-duration">
+        <div class="row plan-duration">
             <div class="col-md-9 d-flex align-items-center">
                 Totale
             </div>
-            <div class="col-md-3 d-flex align-items-center">
-                <i class="far fa-clock"></i>
+            <div class="col-md-3 d-flex align-items-center plan-duration">
+                <i class="far fa-clock"></i><time>1h 1m 30s</time>
             </div>
         </div>
     
