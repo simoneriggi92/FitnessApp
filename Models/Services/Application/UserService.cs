@@ -17,6 +17,7 @@ namespace GymApp.Models.Services.Application
                 Id = 10,
                 Name="Simone",
                 Surname = "Riggi",
+                Email = "simone.riggi92@gmail.com",
                 Username = "Simo92",
                 Password ="1234",
                 BithDay = DateTime.Parse("14 Oct 1992"),

@@ -4,7 +4,7 @@
 <div class="container rounded bg-white mt-5 mb-5">
     <div class="row">
         <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="@Model.ImagePath"><span class="font-weight-bold">@Model.Name</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span></div>
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="@Model.ImagePath"><span class="font-weight-bold">@Model.Name</span><span class="text-black-50">@Model.Email</span><span> </span></div>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
@@ -12,7 +12,7 @@
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
-                     <div class="col-md-4"><label class="labels">ID</label><input type="text" class="form-control" placeholder="ID" value="@Model.Id"></div>
+                     <div class="col-md-4"><label class="labels">ID</label><input type="text" class="form-control" placeholder="ID" value="@Model.Id" disabled></div>
                     <div class="col-md-4"><label class="labels">Name</label><input type="text" class="form-control" placeholder="first name" value="@Model.Name"></div>
                     <div class="col-md-4"><label class="labels">Surname</label><input type="text" class="form-control" value="@Model.Surname" placeholder="surname"></div>
                 </div>
@@ -20,7 +20,16 @@
                     <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value="@Model.PhoneNumber"></div>
                     <div class="col-md-12"><label class="labels">Bith day</label><input type="text" class="form-control" placeholder="enter address line 1" value="@Model.BithDay"></div>
                     <div class="col-md-12"><label class="labels">Username</label><input type="text" class="form-control" placeholder="enter address line 2" value="@Model.Username"></div>
-                    <div class="col-md-12"><label class="labels">Plans Completed</label><input type="text" class="form-control" placeholder="enter address line 2" value="@Model.PlansCompleted"></div>
+                    
+                </div>
+             
+                <div class="row mt-3">
+                   <div class="col-md-6"><label class="labels">Plans Completed</label><input type="text" class="form-control" placeholder="country" value="@Model.PlansCompleted"></div>
+                    <div class="col-md-6"><label class="labels">Current Plan</label>
+                    <a class="btn btn-outline-primary" asp-action="Detail" asp-controller="Plans" asp-route-id = "@Model.Id">Show</a>
+                    </div>
+                </div>
+
    
                 <div class="row mt-3">
                     <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value="@Model.Country"></div>
