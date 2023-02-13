@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using GymApp.Models.Services.Application;
 using GymApp.Models.ViewModels;
@@ -22,18 +23,18 @@ namespace GymApp.Controllers
             return Content("Sono in user Index ");
         }
 
-        public IActionResult Detail(string id)
+        public async Task<IActionResult> Detail(string id)
         {
-            // UserViewModel users = userService.GetUser(id);
+            var user = await userService.GetUserInfoAsync(id);
             // return View(users);
-            return View(null);
+            return View(user);
         }
 
         [Route("Users/all-users")]
-        public async IActionResult GetUsers()
+        public ActionResult GetUsers()
         {
-            var users = await userService.GetUsersAsync();
-            return View(users);
+            // var users = await userService.GetUsersAsync();
+            return View("~/Views/Users/Detail.cshtml", userService.GetUsersInfoAsync());
         }
 
 
