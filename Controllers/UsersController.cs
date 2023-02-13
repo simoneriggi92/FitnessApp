@@ -11,8 +11,9 @@ namespace GymApp.Controllers
    
     public class UsersController : Controller
     {
-        private readonly AbstractUserService userService;
-        public UsersController(AbstractUserService userService)
+        private readonly UserService userService;
+
+        public UsersController(UserService userService)
         {
             this.userService = userService;
         }
@@ -23,7 +24,15 @@ namespace GymApp.Controllers
 
         public IActionResult Detail(string id)
         {
-            UserViewModel users = userService.GetUser(id);
+            // UserViewModel users = userService.GetUser(id);
+            // return View(users);
+            return View(null);
+        }
+
+        [Route("Users/all-users")]
+        public async IActionResult GetUsers()
+        {
+            var users = await userService.GetUsersAsync();
             return View(users);
         }
 

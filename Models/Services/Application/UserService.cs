@@ -5,47 +5,35 @@ using System.Threading.Tasks;
 using GymApp.Models.Services.Infrastructure;
 using GymApp.Models.ViewModels;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace GymApp.Models.Services.Application
 {
-    public class UserService: AbstractUserService
+    public class UserService
     {
-        
-        private readonly IMongoCollection<UserViewModel> _users;
-        public UserService(IOptions<AppDatabaseSettings> appDatabaseSettings):base(appDatabaseSettings)
+        private readonly IMongoCollection<UserViewModel> _usersCollection;
+
+        public UserService(IOptions<AppDatabaseSettings> appDatabaseSettings)
         {
             MongoClient client = new MongoClient(appDatabaseSettings.Value.ConnectionString);
             IMongoDatabase database = client.GetDatabase(appDatabaseSettings.Value.DatabaseName);
-            _users = database.GetCollection<UserViewModel>(appDatabaseSettings.Value.CollectionName);
-        }
-        public override UserViewModel GetUser(string Id)
-        {
-            // var list = new List<UserViewModel>();
-            // var user = new UserViewModel()
-            // {
-            //     Id = 10,
-            //     Name="Simone",
-            //     Surname = "Riggi",
-            //     Email = "simone.riggi92@gmail.com",
-            //     Username = "Simo92",
-            //     Password ="1234",
-            //     BirthDay = DateTime.Parse("14 Oct 1992"),
-            //     PhoneNumber="+393202795763",
-            //     Country="Italy",
-            //     StateRegion="San Cataldo",
-            //     PlansCompleted= 12,
-            //     ImagePath = "/profile.jpeg"
-            // };
-            var user = _usersCollection;
-            // list.Add(user);
-            // return list;
-            return user;
+            _usersCollection = database.GetCollection<UserViewModel>(appDatabaseSettings.Value.CollectionName);
         }
 
-        public async override Task<List<UserViewModel>> GetUsers()
+        public Task<UserViewModel> GetUser(string Id)
         {
-            throw new NotImplementedException();
+            
+           
+            // var user = _usersCollection;
+            // // list.Add(user);
+            // // return list;
+            return null;
+        }
+
+        public async Task<List<UserViewModel>> GetUsersAsync()
+        {
+            return await _usersCollection.Find(new BsonDocument()).ToListAsync();
         }
     }
 }
