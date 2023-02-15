@@ -26,7 +26,8 @@ namespace GymApp.Controllers
 
         public async Task<IActionResult> Detail(string id)
         {
-            var user = await userService.GetUserInfoAsync(id);
+            id = "simo92";
+            var user = await userService.GetUserAsync(id);
             // return View(users);
             return View(user);
         }
@@ -35,7 +36,7 @@ namespace GymApp.Controllers
         public ActionResult GetUsers()
         {
             // var users = await userService.GetUsersAsync();
-            return View("~/Views/Users/Detail.cshtml", userService.GetUsersInfoAsync());
+            return View("~/Views/Users/Detail.cshtml", userService.GetUsersAsync());
         }
 
 

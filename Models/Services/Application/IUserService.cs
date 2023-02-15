@@ -4,7 +4,7 @@ namespace FitnessApp.Models.Services.Application
 {
     public interface IUserService
     {
-        public Task<UserViewModel> GetUserInfoAsync(string id);
-        public Task<List<UserViewModel>> GetUsersInfoAsync();
+        public Task<UserViewModel> GetUserAsync(string id);
+        public Task<List<UserViewModel>> GetUsersAsync();
     }
 }

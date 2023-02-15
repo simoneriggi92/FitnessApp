@@ -13,7 +13,7 @@ public partial class User
 
     public string Email { get; set; } = null!;
 
-    public byte[]? BirthDay { get; set; }
+    public string? BirthDay { get; set; }
 
     public string Password { get; set; } = null!;
 
@@ -23,7 +23,7 @@ public partial class User
 
     public string? StateRegion { get; set; }
 
-    public byte[] PlansCompleted { get; set; } = null!;
+    public int? PlansCompleted { get; set; } = null!;
 
     public string? ImagePath { get; set; }
 

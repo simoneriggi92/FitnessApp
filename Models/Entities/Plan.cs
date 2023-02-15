@@ -9,11 +9,11 @@ public partial class Plan
 
     public long UserId { get; set; }
 
-    public byte[]? CreationDate { get; set; }
+    public string? CreationDate { get; set; }
 
-    public byte[]? StartDate { get; set; }
+    public string? StartDate { get; set; }
 
-    public byte[]? EndDate { get; set; }
+    public string? EndDate { get; set; }
 
     public virtual ICollection<PlansRow> PlansRows { get; } = new List<PlansRow>();
 

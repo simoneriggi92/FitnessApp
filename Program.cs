@@ -1,27 +1,29 @@
+using FitnessApp.Models.Options;
 using FitnessApp.Models.Services.Application;
 using FitnessApp.Models.Services.Infrastructure;
 using GymApp.Models.Services.Application;
 using GymApp.Models.Services.Infrastructure;
+using GymApp.Models.Services.Insfrastructure;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMvc();
-builder.Services.AddTransient<IUserService, MongoUserService>(); 
-builder.Services.AddTransient<ILoginService, LoginService>(); 
-builder.Services.Configure<AppDatabaseSettings>(builder.Configuration.GetSection("AppDatabase"));
-builder.Services.AddSingleton<MongoUserService>();
-// builder.Services.AddSingleton<LoginService>();
+
+#region Services
+builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
+builder.Services.AddTransient<ILoginService, EfCoreLoginService>(); 
+#endregion
 
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 // builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 

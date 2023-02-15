@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.Models.Services.Insfrastructure;
 
-public partial class GymAppDbContext : DbContext
+public partial class AppDbContext : DbContext
 {
-    public GymAppDbContext()
+    public AppDbContext()
     {
     }
 
-    public GymAppDbContext(DbContextOptions<GymAppDbContext> options)
+    public AppDbContext(DbContextOptions<AppDbContext> options)
         : base(options)
     {
     }
@@ -30,7 +30,16 @@ public partial class GymAppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlite("Data Source=Data/gymApp.db");
+        // => optionsBuilder.UseSqlite("Data Source=Data/gymApp.db");
+    {
+        var configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .Build();
+
+        var connectionString = configuration.GetConnectionString("Default");
+        optionsBuilder.UseSqlite(connectionString); 
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -70,13 +79,13 @@ public partial class GymAppDbContext : DbContext
         modelBuilder.Entity<Plan>(entity =>
         {
             entity.Property(e => e.CreationDate)
-                .HasColumnType("DATETIME")
+                .HasColumnType("TEXT(100)")
                 .HasColumnName("creation_date");
             entity.Property(e => e.EndDate)
-                .HasColumnType("END_DATE")
+                .HasColumnType("TEXT(100)")
                 .HasColumnName("end_date");
             entity.Property(e => e.StartDate)
-                .HasColumnType("START_DATE")
+                .HasColumnType("TEXT(100)")
                 .HasColumnName("start_date");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
@@ -120,8 +129,10 @@ public partial class GymAppDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
+            entity.ToTable("Users");
+            entity.HasKey(user => user.Id);
             entity.Property(e => e.BirthDay)
-                .HasColumnType("DATETIME")
+                .HasColumnType("TEXT(100)")
                 .HasColumnName("birth_day");
             entity.Property(e => e.Country)
                 .HasColumnType("TEXT(100)")
@@ -143,7 +154,7 @@ public partial class GymAppDbContext : DbContext
                 .HasColumnName("phone_number");
             entity.Property(e => e.PlansCompleted)
                 .HasDefaultValueSql("0")
-                .HasColumnType("NUMERIC")
+                .HasColumnType("INTEGER")
                 .HasColumnName("plans_completed");
             entity.Property(e => e.StateRegion)
                 .HasColumnType("TEXT(100)")

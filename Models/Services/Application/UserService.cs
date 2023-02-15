@@ -22,13 +22,13 @@ namespace GymApp.Models.Services.Application
             _usersCollection = database.GetCollection<UserViewModel>(appDatabaseSettings.Value.CollectionName);
         }
 
-        public async Task<UserViewModel> GetUserInfoAsync(string id)
+        public async Task<UserViewModel> GetUserAsync(string id)
         {
             var filter = Builders<UserViewModel>.Filter.Eq("Username", id);
             return await _usersCollection.Find(filter).Limit(1).SingleAsync();
         }
 
-        public async Task<List<UserViewModel>> GetUsersInfoAsync()
+        public async Task<List<UserViewModel>> GetUsersAsync()
         {
             return await _usersCollection.Find(new BsonDocument()).ToListAsync();
         }
