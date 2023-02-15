@@ -1,0 +1,1 @@
+dotnet ef dbcontext scaffold "Data Source=Data/gymApp.db" Microsoft.EntityFrameworkCore.Sqlite --output-dir Models/Entities --context-dir Models/Services/Insfrastructure --context GymAppDbContext

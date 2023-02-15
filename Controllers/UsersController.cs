@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using FitnessApp.Models.Services.Application;
 using GymApp.Models.Services.Application;
 using GymApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,9 @@ namespace GymApp.Controllers
    
     public class UsersController : Controller
     {
-        private readonly UserService userService;
+        private readonly IUserService userService;
 
-        public UsersController(UserService userService)
+        public UsersController(IUserService userService)
         {
             this.userService = userService;
         }

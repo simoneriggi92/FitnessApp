@@ -7,11 +7,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddMvc();
-builder.Services.AddTransient<UserService, UserService>(); 
+builder.Services.AddTransient<IUserService, MongoUserService>(); 
 builder.Services.AddTransient<ILoginService, LoginService>(); 
 builder.Services.Configure<AppDatabaseSettings>(builder.Configuration.GetSection("AppDatabase"));
-builder.Services.AddSingleton<UserService>();
+builder.Services.AddSingleton<MongoUserService>();
 // builder.Services.AddSingleton<LoginService>();
+
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
