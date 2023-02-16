@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using GymApp.Models.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.Models.Services.Insfrastructure;
 
-public partial class AppDbContext : DbContext
+public partial class AppDbContext : IdentityDbContext
 {
     public AppDbContext()
     {
@@ -43,7 +44,9 @@ public partial class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        
+        //Inherits IdentityDbContext mapping
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Exercise>(entity =>
         {
             entity.Property(e => e.Description)

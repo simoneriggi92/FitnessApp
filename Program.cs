@@ -4,6 +4,7 @@ using FitnessApp.Models.Services.Infrastructure;
 using GymApp.Models.Services.Application;
 using GymApp.Models.Services.Infrastructure;
 using GymApp.Models.Services.Insfrastructure;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();
 
 #region Services
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
 builder.Services.AddTransient<ILoginService, EfCoreLoginService>(); 
@@ -36,16 +38,26 @@ if (app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseEndpoints(routeBuilder=> {
+    routeBuilder.MapControllerRoute("default","{controller=Home}/{action=Index}/{id?}" );
+    routeBuilder.MapRazorPages();
+});
 
 // app.UseHttpsRedirection();
 
 // app.UseAuthorization();
 
 app.MapControllers();
+
+
 
 app.Run();
 

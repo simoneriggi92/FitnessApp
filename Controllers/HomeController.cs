@@ -44,7 +44,7 @@ namespace GymApp.Controllers
             if(loggedUser != null)
             {
                 TempData["username"] = loggedUser.Username;
-                return RedirectToAction("Dashboard");
+                return RedirectToAction("Index");
             }
             else
             {
