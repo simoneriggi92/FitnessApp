@@ -14,10 +14,12 @@ namespace GymApp.Controllers
     public class UsersController : Controller
     {
         private readonly IUserService userService;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             this.userService = userService;
+            this._httpContextAccessor = httpContextAccessor;
         }
         public IActionResult Index()
         {
@@ -26,7 +28,6 @@ namespace GymApp.Controllers
 
         public async Task<IActionResult> Detail(string id)
         {
-            id = "simo92";
             var user = await userService.GetUserAsync(id);
             // return View(users);
             return View(user);

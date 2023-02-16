@@ -1,3 +1,4 @@
+using FitnessApp.Customizations.Identity;
 using FitnessApp.Models.Options;
 using FitnessApp.Models.Services.Application;
 using FitnessApp.Models.Services.Infrastructure;
@@ -13,7 +14,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();
 
 #region Services
-builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+{
+    options.Password.RequireDigit =true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredUniqueChars = 4;
+
+}).
+AddPasswordValidator<CommonPasswordValidator<IdentityUser>>()
+.AddEntityFrameworkStores<AppDbContext>();
+
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
 builder.Services.AddTransient<ILoginService, EfCoreLoginService>(); 
