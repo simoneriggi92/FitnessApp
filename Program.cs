@@ -16,7 +16,7 @@ builder.Services.AddMvc();
 // builder.Services.AddDbContext<AppDbContext>(options =>
 //     options.UseSqlite(connectionString));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
     options.Password.RequireDigit =true;
     options.Password.RequiredLength = 8;
