@@ -12,9 +12,9 @@ builder.Services.AddMvc();
 
 #region Services
 
-var connectionString ="Data Source=Data/gymApp.db";
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlite(connectionString));
+// var connectionString ="Data Source=Data/gymApp.db";
+// builder.Services.AddDbContext<AppDbContext>(options =>
+//     options.UseSqlite(connectionString));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
