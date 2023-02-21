@@ -1,4 +1,6 @@
-@if(User.Identity.IsAuthenticated)
+@inject SignInManager<IdentityUser> signInManager
+
+@if(signInManager.IsSignedIn(User))
 {
     <ul class="navbar-nav ms-auto">
     <li class="nav-item">

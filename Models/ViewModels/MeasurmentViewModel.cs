@@ -1,4 +1,4 @@
-namespace FitnessApp.Models.ViewModels
+namespace GymApp.Models.ViewModels
 {
     public class MeasurmentViewModel
     {

@@ -1,4 +1,4 @@
-namespace FitnessApp.Models.Options
+namespace GymApp.Models.Options
 {
     public class ConnectionStringsOptions
     {

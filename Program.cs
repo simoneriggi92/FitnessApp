@@ -1,35 +1,40 @@
-using FitnessApp.Customizations.Identity;
-using FitnessApp.Models.Options;
-using FitnessApp.Models.Services.Application;
-using FitnessApp.Models.Services.Infrastructure;
+using GymApp.Customizations.Identity;
 using GymApp.Models.Services.Application;
-using GymApp.Models.Services.Infrastructure;
 using GymApp.Models.Services.Insfrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+// var connectionString = builder.Configuration.GetConnectionString("AppDbContextConnection") ?? throw new InvalidOperationException("Connection string 'AppDbContextConnection' not found.");
 // Add services to the container.
 builder.Services.AddMvc();
 
 #region Services
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
-{
-    options.Password.RequireDigit =true;
-    options.Password.RequiredLength = 8;
-    options.Password.RequireUppercase = true;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = true;
-    options.Password.RequiredUniqueChars = 4;
+// builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+// {
+//     options.Password.RequireDigit =true;
+//     options.Password.RequiredLength = 8;
+//     options.Password.RequireUppercase = true;
+//     options.Password.RequireLowercase = true;
+//     options.Password.RequireNonAlphanumeric = true;
+//     options.Password.RequiredUniqueChars = 4;
 
-}).
-AddPasswordValidator<CommonPasswordValidator<IdentityUser>>()
-.AddEntityFrameworkStores<AppDbContext>();
+// }).
+// AddPasswordValidator<CommonPasswordValidator<IdentityUser>>()
+// .AddEntityFrameworkStores<AppDbContext>();
+
+var connectionString ="Data Source=Data/gymApp.db";
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AppDbContext>();
+// builder.Services.AddControllersWithViews();
+// builder.Services.AddDbContext<AppDbContext>(item =>item.UseSqlite(builder.Configuration.GetConnectionString("AppDbContextConnection")));
 
 builder.Services.AddDbContext<AppDbContext>();
-builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
-builder.Services.AddTransient<ILoginService, EfCoreLoginService>(); 
+// builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
+// builder.Services.AddTransient<ILoginService, EfCoreLoginService>(); 
 #endregion
 
 

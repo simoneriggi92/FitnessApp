@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using FitnessApp.Models.Services.Application;
 using GymApp.Models.Services.Application;
 using GymApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;

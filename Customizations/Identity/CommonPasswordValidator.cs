@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace FitnessApp.Customizations.Identity
+namespace GymApp.Customizations.Identity
 {
     public class CommonPasswordValidator<TUser> : IPasswordValidator<TUser> where TUser : class
     {

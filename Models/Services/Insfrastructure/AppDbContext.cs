@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using FitnessApp.Models.Entities;
 using GymApp.Models.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.Models.Services.Insfrastructure;
 
-public partial class AppDbContext : IdentityDbContext
+public partial class AppDbContext : IdentityDbContext<ApplicationUser>
 {
-    public AppDbContext()
-    {
-    }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options)
+    public AppDbContext():base()
     {
+
+    }
+    public AppDbContext(DbContextOptions<AppDbContext> options): base(options)
+    {
+
     }
 
     public virtual DbSet<Exercise> Exercises { get; set; }
@@ -33,13 +35,13 @@ public partial class AppDbContext : IdentityDbContext
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
         // => optionsBuilder.UseSqlite("Data Source=Data/gymApp.db");
     {
-        var configuration = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json")
-        .Build();
+        // var configuration = new ConfigurationBuilder()
+        // .SetBasePath(Directory.GetCurrentDirectory())
+        // .AddJsonFile("appsettings.json")
+        // .Build();
 
-        var connectionString = configuration.GetConnectionString("Default");
-        optionsBuilder.UseSqlite(connectionString); 
+        // var connectionString = configuration.GetConnectionString("Default");
+        optionsBuilder.UseSqlite("Data Source=Data/gymApp.db"); 
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

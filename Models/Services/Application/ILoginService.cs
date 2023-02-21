@@ -1,6 +1,6 @@
 using GymApp.Models.ViewModels;
 
-namespace FitnessApp.Models.Services.Infrastructure
+namespace GymApp.Models.Services.Infrastructure
 {
     public interface ILoginService
     {

@@ -1,6 +1,6 @@
 using GymApp.Models.ViewModels;
 
-namespace FitnessApp.Models.Services.Application
+namespace GymApp.Models.Services.Application
 {
     public interface IUserService
     {
