@@ -1,3 +1,4 @@
+using FitnessApp.Models.Entities;
 using GymApp.Customizations.Identity;
 using GymApp.Models.Services.Application;
 using GymApp.Models.Services.Insfrastructure;
@@ -10,25 +11,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMvc();
 
 #region Services
-// builder.Services.AddDefaultIdentity<IdentityUser>(options =>
-// {
-//     options.Password.RequireDigit =true;
-//     options.Password.RequiredLength = 8;
-//     options.Password.RequireUppercase = true;
-//     options.Password.RequireLowercase = true;
-//     options.Password.RequireNonAlphanumeric = true;
-//     options.Password.RequiredUniqueChars = 4;
-
-// }).
-// AddPasswordValidator<CommonPasswordValidator<IdentityUser>>()
-// .AddEntityFrameworkStores<AppDbContext>();
 
 var connectionString ="Data Source=Data/gymApp.db";
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(connectionString));
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<AppDbContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+{
+    options.Password.RequireDigit =true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredUniqueChars = 4;
+
+}).
+AddPasswordValidator<CommonPasswordValidator<ApplicationUser>>()
+.AddEntityFrameworkStores<AppDbContext>();
+
+// builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+//     .AddEntityFrameworkStores<AppDbContext>();
 // builder.Services.AddControllersWithViews();
 // builder.Services.AddDbContext<AppDbContext>(item =>item.UseSqlite(builder.Configuration.GetConnectionString("AppDbContextConnection")));
 

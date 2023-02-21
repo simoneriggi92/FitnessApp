@@ -1,29 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\s.riggi\\source\\repos\\GymApp\\GymApp\\GymApp.csproj": {}
+    "/Users/simone/Documents/Personal Projects/FitnessApp/GymApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\s.riggi\\source\\repos\\GymApp\\GymApp\\GymApp.csproj": {
+    "/Users/simone/Documents/Personal Projects/FitnessApp/GymApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s.riggi\\source\\repos\\GymApp\\GymApp\\GymApp.csproj",
+        "projectUniqueName": "/Users/simone/Documents/Personal Projects/FitnessApp/GymApp.csproj",
         "projectName": "GymApp",
-        "projectPath": "C:\\Users\\s.riggi\\source\\repos\\GymApp\\GymApp\\GymApp.csproj",
-        "packagesPath": "C:\\Users\\s.riggi\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s.riggi\\source\\repos\\GymApp\\GymApp\\obj\\",
+        "projectPath": "/Users/simone/Documents/Personal Projects/FitnessApp/GymApp.csproj",
+        "packagesPath": "/Users/simone/.nuget/packages/",
+        "outputPath": "/Users/simone/Documents/Personal Projects/FitnessApp/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\s.riggi\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/simone/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://www.nuget.org/api/v2": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net7.0": {
@@ -113,7 +110,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.102/RuntimeIdentifierGraph.json"
         }
       }
     }
