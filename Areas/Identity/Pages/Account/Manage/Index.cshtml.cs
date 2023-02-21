@@ -61,7 +61,9 @@ namespace GymApp.Areas.Identity.Pages.Account.Manage
             public string PhoneNumber { get; set; }
 
             
-
+            [StringLength(100, ErrorMessage = "The name must be at least {2} and at max {1} characters long.", MinimumLength = 8)]
+            [Display(Name = "Full Name")]
+            public string FullName { get; set; }
             
         }
 
@@ -69,12 +71,13 @@ namespace GymApp.Areas.Identity.Pages.Account.Manage
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            var fullName = user.FullName;
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                FullName = fullName
             };
         }
 
@@ -109,6 +112,18 @@ namespace GymApp.Areas.Identity.Pages.Account.Manage
             {
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
+                {
+                    StatusMessage = "Unexpected error when trying to set phone number.";
+                    return RedirectToPage();
+                }
+            }
+
+            var FullName = user.FullName;
+            if (Input.FullName != FullName)
+            {
+                user.FullName = Input.FullName;
+                var setFullNameResult = await _userManager.UpdateAsync(user);
+                if (!setFullNameResult.Succeeded)
                 {
                     StatusMessage = "Unexpected error when trying to set phone number.";
                     return RedirectToPage();
