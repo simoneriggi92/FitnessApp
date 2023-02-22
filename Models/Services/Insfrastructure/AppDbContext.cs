@@ -170,6 +170,10 @@ public partial class AppDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.Username)
                 .HasColumnType("TEXT(100)")
                 .HasColumnName("username");
+
+            entity.HasOne(user => user.RegisteredUser)
+            .WithOne(registeredUser => registeredUser.User)
+            .HasForeignKey<User>(user => user.UserId);
         });
 
         OnModelCreatingPartial(modelBuilder);

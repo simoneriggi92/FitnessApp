@@ -27,6 +27,7 @@ namespace GymApp.Controllers
 
         public async Task<IActionResult> Detail(string id)
         {
+            id = 
             var user = await userService.GetUserAsync(id);
             // return View(users);
             return View(user);
