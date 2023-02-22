@@ -25,8 +25,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredUniqueChars = 4;
 
-}).
-AddPasswordValidator<CommonPasswordValidator<ApplicationUser>>()
+})
+.AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
+.AddPasswordValidator<CommonPasswordValidator<ApplicationUser>>()
 .AddEntityFrameworkStores<AppDbContext>();
 
 // builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

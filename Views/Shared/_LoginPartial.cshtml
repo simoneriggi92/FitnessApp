@@ -3,10 +3,10 @@
 
 @if(signInManager.IsSignedIn(User))
 {
-    ApplicationUser applicationUser = await userManager.GetUserAsync(User);
+    @* ApplicationUser applicationUser = await userManager.GetUserAsync(User); *@
     <ul class="navbar-nav ms-auto">
     <li class="nav-item">
-        <a class="nav-link" asp-page="/Account/Manage/Index"  asp-area="Identity">Hi @applicationUser.FullName!</a>
+        <a class="nav-link" asp-page="/Account/Manage/Index"  asp-area="Identity">Hi @User.FindFirst("FullName").Value!</a>
     </li>
     <li class="nav-item">
         <form class="form-inline" method="post" asp-page="/Account/Logout" asp-area="Identity">
