@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using FitnessApp.Models.Entities;
 
 namespace GymApp.Models.Entities;
 
 public partial class User
 {
     public long Id { get; set; }
+
+    public string UserId {get;set;}
+    public virtual ApplicationUser RegisteredUser{get;set;}
 
     public string Name { get; set; } = null!;
 
