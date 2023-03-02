@@ -18,17 +18,19 @@ builder.Services.AddMvc();
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {
+    options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit =true;
     options.Password.RequiredLength = 8;
     options.Password.RequireUppercase = true;
     options.Password.RequireLowercase = true;
     options.Password.RequireNonAlphanumeric = true;
     options.Password.RequiredUniqueChars = 4;
-
 })
 .AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
 .AddPasswordValidator<CommonPasswordValidator<ApplicationUser>>()
-.AddEntityFrameworkStores<AppDbContext>();
+.AddEntityFrameworkStores<AppDbContext>()
+.AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider)
+.AddDefaultUI();
 
 // builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
 //     .AddEntityFrameworkStores<AppDbContext>();
@@ -36,7 +38,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 // builder.Services.AddDbContext<AppDbContext>(item =>item.UseSqlite(builder.Configuration.GetConnectionString("AppDbContextConnection")));
 
 builder.Services.AddDbContext<AppDbContext>();
-builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
+// builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
 // builder.Services.AddTransient<ILoginService, EfCoreLoginService>(); 
 #endregion
 
