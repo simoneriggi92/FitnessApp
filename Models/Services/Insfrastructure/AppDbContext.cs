@@ -29,7 +29,6 @@ public partial class AppDbContext : IdentityDbContext<ApplicationUser>
 
     public virtual DbSet<Rep> Reps { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
@@ -130,50 +129,6 @@ public partial class AppDbContext : IdentityDbContext<ApplicationUser>
             entity.Property(e => e.Type)
                 .HasColumnType("TEXT(100)")
                 .HasColumnName("type");
-        });
-
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.ToTable("Users");
-            entity.HasKey(user => user.Id);
-            entity.Property(e => e.BirthDay)
-                .HasColumnType("TEXT(100)")
-                .HasColumnName("birth_day");
-            entity.Property(e => e.Country)
-                .HasColumnType("TEXT(100)")
-                .HasColumnName("country");
-            entity.Property(e => e.Email)
-                .HasColumnType("TEXT(100)")
-                .HasColumnName("email");
-            entity.Property(e => e.ImagePath)
-                .HasColumnType("TEXT(500)")
-                .HasColumnName("image_path");
-            entity.Property(e => e.Name)
-                .HasColumnType("TEXT(100)")
-                .HasColumnName("name");
-            entity.Property(e => e.Password)
-                .HasColumnType("TEXT(100)")
-                .HasColumnName("password");
-            entity.Property(e => e.PhoneNumber)
-                .HasColumnType("TEXT(100)")
-                .HasColumnName("phone_number");
-            entity.Property(e => e.PlansCompleted)
-                .HasDefaultValueSql("0")
-                .HasColumnType("INTEGER")
-                .HasColumnName("plans_completed");
-            entity.Property(e => e.StateRegion)
-                .HasColumnType("TEXT(100)")
-                .HasColumnName("state_region");
-            entity.Property(e => e.Surname)
-                .HasColumnType("TEXT(100)")
-                .HasColumnName("surname");
-            entity.Property(e => e.Username)
-                .HasColumnType("TEXT(100)")
-                .HasColumnName("username");
-
-            entity.HasOne(user => user.RegisteredUser)
-            .WithOne(registeredUser => registeredUser.User)
-            .HasForeignKey<User>(user => user.UserId);
         });
 
         OnModelCreatingPartial(modelBuilder);

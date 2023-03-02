@@ -7,6 +7,7 @@ namespace FitnessApp.Models.Entities
     {
         public string FullName {get;set;}
 
-        public virtual User User{get;set;}
+        public virtual ICollection<Plan> Plans{get;set;}
+        public virtual ICollection<Measurment> Measurments{get;set;}
     }
 }

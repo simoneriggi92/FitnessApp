@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FitnessApp.Models.Entities;
 
 namespace GymApp.Models.Entities;
 
@@ -19,5 +20,5 @@ public partial class Measurment
 
     public string? Waistline { get; set; }
 
-    public virtual User User { get; set; } = null!;
+    public virtual ApplicationUser User { get; set; };
 }
