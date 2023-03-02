@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FitnessApp.Models.Entities;
 
 namespace GymApp.Models.Entities;
 
@@ -17,5 +18,5 @@ public partial class Plan
 
     public virtual ICollection<PlansRow> PlansRows { get; } = new List<PlansRow>();
 
-    public virtual User User { get; set; } = null!;
+    public virtual ApplicationUser User { get; set; } = null!;
 }
