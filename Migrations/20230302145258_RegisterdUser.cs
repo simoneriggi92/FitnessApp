@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GymApp.Migrations
 {
     /// <inheritdoc />
-    public partial class IdentityModel : Migration
+    public partial class RegisterdUser : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,7 @@ namespace GymApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    FullName = table.Column<string>(type: "TEXT", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -78,29 +79,6 @@ namespace GymApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    name = table.Column<string>(type: "TEXT(100)", nullable: false),
-                    surname = table.Column<string>(type: "TEXT(100)", nullable: false),
-                    email = table.Column<string>(type: "TEXT(100)", nullable: false),
-                    birthday = table.Column<string>(name: "birth_day", type: "TEXT(100)", nullable: true),
-                    password = table.Column<string>(type: "TEXT(100)", nullable: false),
-                    phonenumber = table.Column<string>(name: "phone_number", type: "TEXT(100)", nullable: true),
-                    country = table.Column<string>(type: "TEXT(100)", nullable: true),
-                    stateregion = table.Column<string>(name: "state_region", type: "TEXT(100)", nullable: true),
-                    planscompleted = table.Column<int>(name: "plans_completed", type: "INTEGER", nullable: true, defaultValueSql: "0"),
-                    imagepath = table.Column<string>(name: "image_path", type: "TEXT(500)", nullable: true),
-                    username = table.Column<string>(type: "TEXT(100)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -146,8 +124,8 @@ namespace GymApp.Migrations
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
-                    LoginProvider = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    ProviderKey = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    ProviderKey = table.Column<string>(type: "TEXT", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
                     UserId = table.Column<string>(type: "TEXT", nullable: false)
                 },
@@ -191,8 +169,8 @@ namespace GymApp.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    LoginProvider = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 128, nullable: false),
+                    LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
                     Value = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
@@ -212,7 +190,7 @@ namespace GymApp.Migrations
                 {
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    userid = table.Column<long>(name: "user_id", type: "INTEGER", nullable: false),
+                    user_id = table.Column<string>(type: "TEXT", nullable: false),
                     chest = table.Column<string>(type: "TEXT(50)", nullable: true),
                     bicep = table.Column<string>(type: "TEXT(50)", nullable: true),
                     gluteus = table.Column<string>(type: "TEXT(50)", nullable: true),
@@ -223,9 +201,9 @@ namespace GymApp.Migrations
                 {
                     table.PrimaryKey("PK_Measurments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Measurments_Users_user_id",
-                        column: x => x.userid,
-                        principalTable: "Users",
+                        name: "FK_Measurments_AspNetUsers_user_id",
+                        column: x => x.user_id,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -236,18 +214,18 @@ namespace GymApp.Migrations
                 {
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    userid = table.Column<long>(name: "user_id", type: "INTEGER", nullable: false),
-                    creationdate = table.Column<string>(name: "creation_date", type: "TEXT(100)", nullable: true),
-                    startdate = table.Column<string>(name: "start_date", type: "TEXT(100)", nullable: true),
-                    enddate = table.Column<string>(name: "end_date", type: "TEXT(100)", nullable: true)
+                    user_id = table.Column<string>(type: "TEXT", nullable: false),
+                    creation_date = table.Column<string>(type: "TEXT(100)", nullable: true),
+                    start_date = table.Column<string>(type: "TEXT(100)", nullable: true),
+                    end_date = table.Column<string>(type: "TEXT(100)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Plans", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Plans_Users_user_id",
-                        column: x => x.userid,
-                        principalTable: "Users",
+                        name: "FK_Plans_AspNetUsers_user_id",
+                        column: x => x.user_id,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -258,33 +236,33 @@ namespace GymApp.Migrations
                 {
                     Id = table.Column<long>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    planid = table.Column<long>(name: "plan_id", type: "INTEGER", nullable: false),
-                    exerciseid = table.Column<long>(name: "exercise_id", type: "INTEGER", nullable: false),
-                    repsid = table.Column<long>(name: "reps_id", type: "INTEGER", nullable: false),
-                    weeknumber = table.Column<long>(name: "week_number", type: "INTEGER", nullable: false),
+                    plan_id = table.Column<long>(type: "INTEGER", nullable: false),
+                    exercise_id = table.Column<long>(type: "INTEGER", nullable: false),
+                    reps_id = table.Column<long>(type: "INTEGER", nullable: false),
+                    week_number = table.Column<long>(type: "INTEGER", nullable: false),
                     weight = table.Column<string>(type: "TEXT(10)", nullable: true),
                     rest = table.Column<string>(type: "TEXT(20)", nullable: true),
                     band = table.Column<string>(type: "TEXT(30)", nullable: true),
-                    executedreps = table.Column<string>(name: "executed_reps", type: "TEXT(50)", nullable: true)
+                    executed_reps = table.Column<string>(type: "TEXT(50)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Plans_Rows", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Plans_Rows_Exercises_exercise_id",
-                        column: x => x.exerciseid,
+                        column: x => x.exercise_id,
                         principalTable: "Exercises",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Plans_Rows_Plans_plan_id",
-                        column: x => x.planid,
+                        column: x => x.plan_id,
                         principalTable: "Plans",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Plans_Rows_Reps_reps_id",
-                        column: x => x.repsid,
+                        column: x => x.reps_id,
                         principalTable: "Reps",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -381,9 +359,6 @@ namespace GymApp.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Exercises");
 
             migrationBuilder.DropTable(
@@ -393,7 +368,7 @@ namespace GymApp.Migrations
                 name: "Reps");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "AspNetUsers");
         }
     }
 }

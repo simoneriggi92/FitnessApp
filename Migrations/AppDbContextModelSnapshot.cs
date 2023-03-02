@@ -126,8 +126,9 @@ namespace GymApp.Migrations
                         .HasColumnType("TEXT(50)")
                         .HasColumnName("gluteus");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("INTEGER")
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
                         .HasColumnName("user_id");
 
                     b.Property<string>("Waistline")
@@ -159,8 +160,9 @@ namespace GymApp.Migrations
                         .HasColumnType("TEXT(100)")
                         .HasColumnName("start_date");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("INTEGER")
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT")
                         .HasColumnName("user_id");
 
                     b.HasKey("Id");
@@ -232,67 +234,6 @@ namespace GymApp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Reps");
-                });
-
-            modelBuilder.Entity("GymApp.Models.Entities.User", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("BirthDay")
-                        .HasColumnType("TEXT(100)")
-                        .HasColumnName("birth_day");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("TEXT(100)")
-                        .HasColumnName("country");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("TEXT(100)")
-                        .HasColumnName("email");
-
-                    b.Property<string>("ImagePath")
-                        .HasColumnType("TEXT(500)")
-                        .HasColumnName("image_path");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT(100)")
-                        .HasColumnName("name");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("TEXT(100)")
-                        .HasColumnName("password");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("TEXT(100)")
-                        .HasColumnName("phone_number");
-
-                    b.Property<int?>("PlansCompleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasColumnName("plans_completed")
-                        .HasDefaultValueSql("0");
-
-                    b.Property<string>("StateRegion")
-                        .HasColumnType("TEXT(100)")
-                        .HasColumnName("state_region");
-
-                    b.Property<string>("Surname")
-                        .IsRequired()
-                        .HasColumnType("TEXT(100)")
-                        .HasColumnName("surname");
-
-                    b.Property<string>("Username")
-                        .HasColumnType("TEXT(100)")
-                        .HasColumnName("username");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -370,11 +311,9 @@ namespace GymApp.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
@@ -412,11 +351,9 @@ namespace GymApp.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
@@ -429,7 +366,7 @@ namespace GymApp.Migrations
 
             modelBuilder.Entity("GymApp.Models.Entities.Measurment", b =>
                 {
-                    b.HasOne("GymApp.Models.Entities.User", "User")
+                    b.HasOne("FitnessApp.Models.Entities.ApplicationUser", "User")
                         .WithMany("Measurments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -440,7 +377,7 @@ namespace GymApp.Migrations
 
             modelBuilder.Entity("GymApp.Models.Entities.Plan", b =>
                 {
-                    b.HasOne("GymApp.Models.Entities.User", "User")
+                    b.HasOne("FitnessApp.Models.Entities.ApplicationUser", "User")
                         .WithMany("Plans")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -527,6 +464,13 @@ namespace GymApp.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("FitnessApp.Models.Entities.ApplicationUser", b =>
+                {
+                    b.Navigation("Measurments");
+
+                    b.Navigation("Plans");
+                });
+
             modelBuilder.Entity("GymApp.Models.Entities.Exercise", b =>
                 {
                     b.Navigation("PlansRows");
@@ -540,13 +484,6 @@ namespace GymApp.Migrations
             modelBuilder.Entity("GymApp.Models.Entities.Rep", b =>
                 {
                     b.Navigation("PlansRows");
-                });
-
-            modelBuilder.Entity("GymApp.Models.Entities.User", b =>
-                {
-                    b.Navigation("Measurments");
-
-                    b.Navigation("Plans");
                 });
 #pragma warning restore 612, 618
         }
