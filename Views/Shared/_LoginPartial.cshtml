@@ -1,5 +1,5 @@
-@inject SignInManager<ApplicationUser> signInManager
-@inject UserManager<ApplicationUser> userManager
+@inject SignInManager<AspNetUser> signInManager
+@inject UserManager<AspNetUser> userManager
 
 @if(signInManager.IsSignedIn(User))
 {

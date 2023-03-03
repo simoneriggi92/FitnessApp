@@ -12,10 +12,10 @@ namespace GymApp.Controllers
    
     public class UsersController : Controller
     {
-        private readonly IUserService userService;
+        private readonly IEfCoreUserService userService;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public UsersController(IUserService userService, IHttpContextAccessor httpContextAccessor)
+        public UsersController(IEfCoreUserService userService, IHttpContextAccessor httpContextAccessor)
         {
             this.userService = userService;
             this._httpContextAccessor = httpContextAccessor;

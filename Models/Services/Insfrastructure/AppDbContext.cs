@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using FitnessApp.Models.Entities;
 using GymApp.Models.Entities;
@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.Models.Services.Insfrastructure;
 
-public partial class AppDbContext : IdentityDbContext<ApplicationUser>
+public partial class AppDbContext : IdentityDbContext<AspNetUser>
 {
 
     public AppDbContext():base()
@@ -19,6 +19,9 @@ public partial class AppDbContext : IdentityDbContext<ApplicationUser>
 
     }
 
+
+    public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+
     public virtual DbSet<Exercise> Exercises { get; set; }
 
     public virtual DbSet<Measurment> Measurments { get; set; }
@@ -29,29 +32,16 @@ public partial class AppDbContext : IdentityDbContext<ApplicationUser>
 
     public virtual DbSet<Rep> Reps { get; set; }
 
-    public virtual DbSet<ApplicationUser> Users { get; set; }
-
-    
-    
-
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        // => optionsBuilder.UseSqlite("Data Source=Data/gymApp.db");
-    {
-        var configuration = new ConfigurationBuilder()
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json")
-        .Build();
-
-        var connectionString = configuration.GetConnectionString("Default");
-        optionsBuilder.UseSqlite(connectionString); 
-    }
+        => optionsBuilder.UseSqlite("Data Source=Data/gymApp.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        //Inherits IdentityDbContext mapping
         base.OnModelCreating(modelBuilder);
+
+       
+
 
         modelBuilder.Entity<Exercise>(entity =>
         {
@@ -65,6 +55,8 @@ public partial class AppDbContext : IdentityDbContext<ApplicationUser>
 
         modelBuilder.Entity<Measurment>(entity =>
         {
+            entity.HasIndex(e => e.UserId, "IX_Measurments_user_id");
+
             entity.Property(e => e.Bicep)
                 .HasColumnType("TEXT(50)")
                 .HasColumnName("bicep");
@@ -87,6 +79,8 @@ public partial class AppDbContext : IdentityDbContext<ApplicationUser>
 
         modelBuilder.Entity<Plan>(entity =>
         {
+            entity.HasIndex(e => e.UserId, "IX_Plans_user_id");
+
             entity.Property(e => e.CreationDate)
                 .HasColumnType("TEXT(100)")
                 .HasColumnName("creation_date");
@@ -104,6 +98,12 @@ public partial class AppDbContext : IdentityDbContext<ApplicationUser>
         modelBuilder.Entity<PlansRow>(entity =>
         {
             entity.ToTable("Plans_Rows");
+
+            entity.HasIndex(e => e.ExerciseId, "IX_Plans_Rows_exercise_id");
+
+            entity.HasIndex(e => e.PlanId, "IX_Plans_Rows_plan_id");
+
+            entity.HasIndex(e => e.RepsId, "IX_Plans_Rows_reps_id");
 
             entity.Property(e => e.Band)
                 .HasColumnType("TEXT(30)")

@@ -5,13 +5,13 @@ using Microsoft.Extensions.Options;
 
 namespace GymApp.Customizations.Identity
 {
-    public class CustomClaimsPrincipalFactory : UserClaimsPrincipalFactory<ApplicationUser>
+    public class CustomClaimsPrincipalFactory : UserClaimsPrincipalFactory<AspNetUser>
     {
-        public CustomClaimsPrincipalFactory(UserManager<ApplicationUser> userManager, IOptions<IdentityOptions> optionsAccessor) : base(userManager, optionsAccessor)
+        public CustomClaimsPrincipalFactory(UserManager<AspNetUser> userManager, IOptions<IdentityOptions> optionsAccessor) : base(userManager, optionsAccessor)
         {
         }
 
-        protected override async Task<ClaimsIdentity> GenerateClaimsAsync(ApplicationUser user)
+        protected override async Task<ClaimsIdentity> GenerateClaimsAsync(AspNetUser user)
         {
             ClaimsIdentity identity =  await base.GenerateClaimsAsync(user);
             identity.AddClaim(new Claim("Id", user.Id));

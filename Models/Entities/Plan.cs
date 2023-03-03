@@ -8,7 +8,7 @@ public partial class Plan
 {
     public long Id { get; set; }
 
-    public string UserId { get; set; }
+    public string UserId { get; set; } = null!;
 
     public string? CreationDate { get; set; }
 
@@ -16,7 +16,9 @@ public partial class Plan
 
     public string? EndDate { get; set; }
 
+    public string? Status { get; set; }
+
     public virtual ICollection<PlansRow> PlansRows { get; } = new List<PlansRow>();
 
-    public virtual ApplicationUser User { get; set; } = null!;
+    public virtual AspNetUser User { get; set; } = null!;
 }

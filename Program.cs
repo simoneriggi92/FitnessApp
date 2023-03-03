@@ -1,4 +1,5 @@
 using FitnessApp.Models.Entities;
+using FitnessApp.Models.Services.Application;
 using GymApp.Customizations.Identity;
 using GymApp.Models.Services.Application;
 using GymApp.Models.Services.Insfrastructure;
@@ -16,7 +17,7 @@ builder.Services.AddMvc();
 // builder.Services.AddDbContext<AppDbContext>(options =>
 //     options.UseSqlite(connectionString));
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+builder.Services.AddIdentity<AspNetUser, IdentityRole>(options =>
 {
     options.SignIn.RequireConfirmedAccount = false;
     options.Password.RequireDigit =true;
@@ -27,9 +28,9 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
     options.Password.RequiredUniqueChars = 4;
 })
 .AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
-.AddPasswordValidator<CommonPasswordValidator<ApplicationUser>>()
+.AddPasswordValidator<CommonPasswordValidator<AspNetUser>>()
 .AddEntityFrameworkStores<AppDbContext>()
-.AddTokenProvider<DataProtectorTokenProvider<ApplicationUser>>(TokenOptions.DefaultProvider)
+.AddTokenProvider<DataProtectorTokenProvider<AspNetUser>>(TokenOptions.DefaultProvider)
 .AddDefaultUI();
 
 // builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -38,7 +39,8 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 // builder.Services.AddDbContext<AppDbContext>(item =>item.UseSqlite(builder.Configuration.GetConnectionString("AppDbContextConnection")));
 
 builder.Services.AddDbContext<AppDbContext>();
-builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
+builder.Services.AddTransient<IEfCoreUserService, EfCoreUserService>(); 
+builder.Services.AddTransient<IEfCorePlanService, EfCorePlanService>(); 
 // builder.Services.AddTransient<ILoginService, EfCoreLoginService>(); 
 #endregion
 

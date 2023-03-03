@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GymApp.Models.Services.Application
 {
-    public class EfCoreUserService : IUserService
+    public class EfCoreUserService : IEfCoreUserService
     {
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly AppDbContext dbContext;
