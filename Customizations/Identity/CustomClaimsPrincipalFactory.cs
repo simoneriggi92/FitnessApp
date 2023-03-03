@@ -16,7 +16,7 @@ namespace GymApp.Customizations.Identity
             ClaimsIdentity identity =  await base.GenerateClaimsAsync(user);
             identity.AddClaim(new Claim("Id", user.Id));
             identity.AddClaim(new Claim("FullName", user.FullName));
-            identity.AddClaim(new Claim("Username", user.UserName));
+            // identity.AddClaim(new Claim("Username", user.UserName));
             return identity;
 ;        }
     }

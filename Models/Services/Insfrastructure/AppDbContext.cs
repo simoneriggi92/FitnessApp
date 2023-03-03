@@ -29,7 +29,7 @@ public partial class AppDbContext : IdentityDbContext<ApplicationUser>
 
     public virtual DbSet<Rep> Reps { get; set; }
 
-     public virtual DbSet<ApplicationUser> Users { get; set; }
+    public virtual DbSet<ApplicationUser> Users { get; set; }
 
     
     

@@ -1,4 +1,3 @@
-using GymApp.Models.Services.Infrastructure;
 using GymApp.Models.Services.Insfrastructure;
 using GymApp.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
