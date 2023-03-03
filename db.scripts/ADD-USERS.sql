@@ -6,5 +6,6 @@ INSERT INTO Users(name, surname, username, password, email, birth_day, country, 
 
 
 
-update Users
-set image_path = "/profile.jpeg"
+update AspNetUsers
+set ImagePath = "/profile.jpeg"
+where Id = 'c5ff26db-62fe-4f00-90e2-141a8f234d75'
