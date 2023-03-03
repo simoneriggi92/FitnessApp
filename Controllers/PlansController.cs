@@ -13,7 +13,7 @@ namespace GymApp.Controllers
         // 
         // GET: /HelloWorld/
 
-         public IActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
