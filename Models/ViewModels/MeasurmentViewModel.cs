@@ -4,7 +4,7 @@ namespace GymApp.Models.ViewModels
     {
     public long Id { get; set; }
 
-    public long UserId { get; set; }
+    public string UserId { get; set; }
 
     public string? Chest { get; set; }
 

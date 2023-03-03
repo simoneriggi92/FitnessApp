@@ -11,9 +11,8 @@ namespace GymApp.Models.ViewModels
 	public class UserViewModel
 	{
 	
-		public long Id{get;set;}
-		public string? Name{get;set;}
-		public string? Surname { get; set; }
+		public string Id{get;set;}
+		public string? FullName{get;set;}
 		public string? Email { get; set; }
 		public string? BirthDay { get; set; }
 		public string? Username { get; set; }

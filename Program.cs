@@ -38,7 +38,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 // builder.Services.AddDbContext<AppDbContext>(item =>item.UseSqlite(builder.Configuration.GetConnectionString("AppDbContextConnection")));
 
 builder.Services.AddDbContext<AppDbContext>();
-// builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
+builder.Services.AddTransient<IUserService, EfCoreUserService>(); 
 // builder.Services.AddTransient<ILoginService, EfCoreLoginService>(); 
 #endregion
 
