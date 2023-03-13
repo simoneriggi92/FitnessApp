@@ -11,4 +11,6 @@ namespace GymApp.Models.ViewModels
         public string Status{get;set;}
 
     }
+
+    
 }
