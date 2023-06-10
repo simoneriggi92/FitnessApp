@@ -1,6 +1,7 @@
 using GymApp.Models.Entities;
 using GymApp.Models.Services.Insfrastructure;
 using GymApp.Models.ViewModels;
+using GymApp.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FitnessApp.Models.Services.Application
@@ -78,6 +79,23 @@ namespace FitnessApp.Models.Services.Application
             });
 
             await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task AddPlan()
+        {
+            var userID = httpContextAccessor.HttpContext.User.FindFirst("Id").Value;
+            var newPlan = new Plan()
+            {
+                UserId = userID,
+                CreationDate = DateTime.Now.ToString(),
+                StartDate = DateTime.Now.ToString(),
+                EndDate = DateTime.Now.ToString(),
+                Status = "In Progress"
+            };
+
+            this.dbContext.Plans.Add(newPlan);
+            await this.dbContext.SaveChangesAsync();
+            return;
         }
     }
 }
