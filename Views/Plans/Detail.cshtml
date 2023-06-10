@@ -55,10 +55,9 @@
     </h2>
     @* @foreach (var lesson in Model.Lessons)
     { *@
-    @for(int i = 0; i< 8; i++)
+    @for (int i = 0; i < 8; i++)
     {
-        <hr>
-        
+
         <div class="row">
             <div class="col-md-9 d-flex align-items-center ">
                 <a href="#">Exercise @i</a>
@@ -67,9 +66,9 @@
                 <i class="far fa-clock"></i><time>1m 30s</time>
             </div>
         </div>
-    @* } *@
+        
     }
-        </hr>
+    @* } *@
 
         <div class="row plan-duration">
             <div class="col-md-9 d-flex align-items-center">

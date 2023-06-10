@@ -16,7 +16,7 @@ public partial class Plan
 
     public string? EndDate { get; set; }
 
-    public string? Status { get; set; }
+    public string Status { get; set; }
 
     public virtual ICollection<PlansRow> PlansRows { get; } = new List<PlansRow>();
 

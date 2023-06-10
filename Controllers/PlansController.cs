@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using FitnessApp.Models.Services.Application;
+using GymApp.Models.Entities;
 using GymApp.Models.Services.Application;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -27,7 +28,7 @@ namespace GymApp.Controllers
         public IActionResult Index()
         {
             var user = planService.GetPlans();
-            return View(user);
+            return View(user.Result);
         }
 
      
@@ -36,6 +37,14 @@ namespace GymApp.Controllers
         public IActionResult CreatePlan(string id)
         {
             return View();
+        }
+        
+        // 
+        // GET: /HelloWorld/Welcome/ 
+        public void AddPlan(Plan plan)
+        {
+            var user = planService.GetPlans();
+            planService.AddPlan(plan);
         }
 
          public IActionResult Detail(string id)

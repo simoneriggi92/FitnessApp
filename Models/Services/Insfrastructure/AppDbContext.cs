@@ -91,6 +91,9 @@ public partial class AppDbContext : IdentityDbContext<AspNetUser>
                 .HasColumnType("TEXT(100)")
                 .HasColumnName("start_date");
             entity.Property(e => e.UserId).HasColumnName("user_id");
+            entity.Property(e => e.Status)
+                .HasColumnType("TEXT(100)")
+                .HasColumnName("status");
 
             entity.HasOne(d => d.User).WithMany(p => p.Plans).HasForeignKey(d => d.UserId);
         });

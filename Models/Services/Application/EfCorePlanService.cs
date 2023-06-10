@@ -1,3 +1,4 @@
+using GymApp.Models.Entities;
 using GymApp.Models.Services.Insfrastructure;
 using GymApp.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +26,7 @@ namespace FitnessApp.Models.Services.Application
         {
             var userID = httpContextAccessor.HttpContext.User.FindFirst("Id").Value;
 
-            var user = await this.dbContext.Users.Where(user => user.Id == userID)
+            var userViewModel = await this.dbContext.Users.Where(user => user.Id == userID)
             .Select(user => new UserViewModel
             {
                 Id = user.Id,
@@ -37,11 +38,46 @@ namespace FitnessApp.Models.Services.Application
                     UserId = plan.UserId,
                     CreationDate = plan.CreationDate,
                     StartDate = plan.StartDate,
-                    EndDate = plan.EndDate
+                    EndDate = plan.EndDate,
+                    Status = plan.Status
                 }).ToList()
             }).FirstOrDefaultAsync();
 
-            return user;
+            return userViewModel;
+        }
+
+
+        public async Task AddPlan(Plan plan)
+        {
+            var userID = httpContextAccessor.HttpContext.User.FindFirst("Id").Value;
+            var userViewModel = await this.dbContext.Users.Where(user => user.Id == userID)
+                .Select(user => new UserViewModel
+                {
+                    Id = user.Id,
+                    FullName = user.FullName,
+                    Email = user.Email,
+                    Plans = user.Plans.Select(plan => new PlanViewModel
+                    {
+                        Id = plan.Id,
+                        UserId = plan.UserId,
+                        CreationDate = plan.CreationDate,
+                        StartDate = plan.StartDate,
+                        EndDate = plan.EndDate,
+                        Status = plan.Status
+                    }).ToList()
+                }).FirstOrDefaultAsync();
+            
+            userViewModel.Plans.Add(new PlanViewModel()
+            {
+                Id = plan.Id,
+                UserId = plan.UserId,
+                CreationDate = plan.CreationDate,
+                StartDate = plan.StartDate,
+                EndDate = plan.EndDate,
+                Status = plan.Status
+            });
+
+            await this.dbContext.SaveChangesAsync();
         }
     }
 }

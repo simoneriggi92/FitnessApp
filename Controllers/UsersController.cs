@@ -33,12 +33,12 @@ namespace GymApp.Controllers
             return View(user);
         }
 
-        [Route("Users/all-users")]
-        public ActionResult GetUsers()
-        {
-            // var users = await userService.GetUsersAsync();
-            return View("~/Views/Users/Detail.cshtml", userService.GetUsersAsync());
-        }
+        // [Route("Users/all-users")]
+        // public ActionResult GetUsers()
+        // {
+        //     // var users = await userService.GetUsersAsync();
+        //     return View("~/Views/Users/Detail.cshtml", userService.GetUsersAsync().Result);
+        // }
 
 
     }
