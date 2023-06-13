@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FitnessApp.Models.Services.Application;
 using GymApp.Models.Entities;
 using GymApp.Models.Services.Application;
+using GymApp.Models.Services.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -14,14 +15,16 @@ namespace GymApp.Controllers
     public class PlansController : Controller
     {
         private readonly IEfCorePlanService planService;
+        private readonly IEfCoreExerciseService exerciseService;
         private readonly IHttpContextAccessor httpContextAccessor;
 
         // 
         // GET: /HelloWorld/
 
-        public PlansController(IEfCorePlanService planService, IHttpContextAccessor httpContextAccessor)
+        public PlansController(IEfCorePlanService planService,IEfCoreExerciseService exerciseService, IHttpContextAccessor httpContextAccessor)
         {
             this.planService = planService;
+            this.exerciseService = exerciseService;
             this.httpContextAccessor = httpContextAccessor;
         }
 
@@ -36,7 +39,8 @@ namespace GymApp.Controllers
         // GET: /HelloWorld/Welcome/ 
         public IActionResult CreatePlan(string id)
         {
-            return View();
+            var exercises = exerciseService.GetExercises();
+            return View(exercises.Result);
         }
         
         // 

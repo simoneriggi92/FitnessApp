@@ -40,9 +40,6 @@ public partial class AppDbContext : IdentityDbContext<AspNetUser>
     {
         base.OnModelCreating(modelBuilder);
 
-       
-
-
         modelBuilder.Entity<Exercise>(entity =>
         {
             entity.Property(e => e.Description)
@@ -51,6 +48,9 @@ public partial class AppDbContext : IdentityDbContext<AspNetUser>
             entity.Property(e => e.Name)
                 .HasColumnType("TEXT(100)")
                 .HasColumnName("name");
+            entity.Property(e => e.Category)
+                .HasColumnType("TEXT(100)")
+                .HasColumnName("category");
         });
 
         modelBuilder.Entity<Measurment>(entity =>
@@ -129,7 +129,7 @@ public partial class AppDbContext : IdentityDbContext<AspNetUser>
 
             entity.HasOne(d => d.Plan).WithMany(p => p.PlansRows).HasForeignKey(d => d.PlanId);
 
-            entity.HasOne(d => d.Reps).WithMany(p => p.PlansRows).HasForeignKey(d => d.RepsId);
+            // entity.HasOne(d => d.Reps).WithMany(p => p.PlansRows).HasForeignKey(d => d.RepsId);
         });
 
         modelBuilder.Entity<Rep>(entity =>

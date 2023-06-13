@@ -27,5 +27,4 @@ public partial class PlansRow
 
     public virtual Plan Plan { get; set; } = null!;
 
-    public virtual Rep Reps { get; set; } = null!;
 }

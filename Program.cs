@@ -2,6 +2,7 @@ using FitnessApp.Models.Entities;
 using FitnessApp.Models.Services.Application;
 using GymApp.Customizations.Identity;
 using GymApp.Models.Services.Application;
+using GymApp.Models.Services.Application.Interfaces;
 using GymApp.Models.Services.Insfrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,7 @@ builder.Services.AddIdentity<AspNetUser, IdentityRole>(options =>
 builder.Services.AddDbContext<AppDbContext>();
 builder.Services.AddTransient<IEfCoreUserService, EfCoreUserService>(); 
 builder.Services.AddTransient<IEfCorePlanService, EfCorePlanService>(); 
+builder.Services.AddTransient<IEfCoreExerciseService, EfCoreExerciseService>(); 
 // builder.Services.AddTransient<ILoginService, EfCoreLoginService>(); 
 #endregion
 

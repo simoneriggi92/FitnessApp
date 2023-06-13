@@ -10,4 +10,5 @@ public partial class Rep
     public string? Type { get; set; }
 
     public virtual ICollection<PlansRow> PlansRows { get; } = new List<PlansRow>();
+    public virtual Exercise Exercise { get; set; } = null!;
 }
