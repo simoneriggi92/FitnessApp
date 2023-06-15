@@ -134,6 +134,8 @@ public partial class AppDbContext : IdentityDbContext<AspNetUser>
 
         modelBuilder.Entity<Rep>(entity =>
         {
+            entity.ToTable("Reps");
+            entity.HasIndex(e => e.Id);
             entity.Property(e => e.Type)
                 .HasColumnType("TEXT(100)")
                 .HasColumnName("type");

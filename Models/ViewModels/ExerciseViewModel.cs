@@ -15,6 +15,7 @@ public class ExerciseViewModel
 
     // public virtual ICollection<PlanRo> PlansRows { get; } = new List<PlansRow>();
     
-    public virtual ICollection<Rep> Reps { get; set; } = new List<Rep>();
+    public virtual ICollection<RepViewModel> Reps { get; set; } = new List<RepViewModel>();
 
+    public bool Checked { get; set; } = false;
 }

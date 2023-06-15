@@ -7,6 +7,7 @@ using FitnessApp.Models.Services.Application;
 using GymApp.Models.Entities;
 using GymApp.Models.Services.Application;
 using GymApp.Models.Services.Application.Interfaces;
+using GymApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -37,18 +38,19 @@ namespace GymApp.Controllers
      
         // 
         // GET: /HelloWorld/Welcome/ 
-        public IActionResult CreatePlan(string id)
+        public void CreatePlan(List<string> exercises)
         {
-            var exercises = exerciseService.GetExercises();
-            return View(exercises.Result);
+            var plan = new Plan();
+            var user = planService.GetPlans();
+            planService.AddPlan(plan);
         }
         
         // 
         // GET: /HelloWorld/Welcome/ 
-        public void AddPlan(Plan plan)
+        public IActionResult AddPlan(string id)
         {
-            var user = planService.GetPlans();
-            planService.AddPlan(plan);
+            var exercises = exerciseService.GetExercises();
+            return View(exercises.Result);
         }
 
          public IActionResult Detail(string id)

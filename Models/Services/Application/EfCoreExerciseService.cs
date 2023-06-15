@@ -19,13 +19,22 @@ public class EfCoreExerciseService:IEfCoreExerciseService
 
     public async Task<List<ExerciseViewModel>> GetExercises()
     {
+        var reps = await this.dbContext.Reps.Select( 
+                r => new RepViewModel()
+                    {
+                        Id = r.Id,
+                        Type = r.Type
+                    })
+            .ToListAsync();
+        
         var exercises = await this.dbContext.Exercises.Select(
             exercise => new ExerciseViewModel()
             {
                 Id = exercise.Id,
                 Name = exercise.Name,
                 Description = exercise.Description,
-                Category = exercise.Category
+                Category = exercise.Category,
+                Reps = reps
             }).ToListAsync();
         return exercises;
     }
